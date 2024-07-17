@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Search by {{ query_text }} results</h1>
+<ul>
+{% for income_obj in income_list %}
+    <li>
+        <a href="{% url 'income-one' income_obj.id %}">{{ income_obj.date }}, {{ income_obj.amount }} Eur, {{ income_obj.income_category }}</a>
+    </li>
+{% endfor %}
+{% for expense_obj in expense_list %}
+    <li>
+        <a href="{% url 'expense-one' expense_obj.id %}">{{ expense_obj.date }}, {{ expense_obj.amount }} Eur, {{ expense_obj.display_categories }}</a>
+    </li>
+{% endfor %}
+{% for bill_obj in bill_list %}
+    <li>
+        <a href="{% url 'bill-one' bill_obj.id %}">{{ bill_obj.bill_category }}, {{ bill_obj.amount }} Eur, {{ bill_obj.billing_date }}-{{ bill_obj.date_due }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Reviews</h1>
+<hr>
+{% if user.is_authenticated %}
+<br>
+<div>
+    <h5>Leave a review</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.content }}
+        <div>
+        <input type="submit" class="btn btn-outline-success btn-sm" value="Post"/>
+        </div>
+    </form>
+</div>
+{% endif %}
+<br>
+{% if appreview %}
+    {% for review in appreview %}
+
+<small><b>{{ review.reviewer }}</b> <em>{{ review.date_created }}</em></small>
+        <p class="bg-light">{{ review.content }}</p>
+    {% endfor %}
+{% else %}
+    <p>No reviews yet...</p>
+{% endif %}
+
+{% endblock %}

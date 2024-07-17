@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4><b>Total income: </b>{{ total_amount }} Eur</h4>
+
+<br>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Category
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{% url 'statistics-income-c1' %}">Salary</a>
+    <a class="dropdown-item" href="{% url 'statistics-income-c2' %}">Vinted</a>
+    <a class="dropdown-item" href="{% url 'statistics-income-c3' %}">Etsy</a>
+    <a class="dropdown-item" href="{% url 'statistics-income-c4' %}">Other</a>
+  </div>
+  <a class="btn btn-secondary" href="{% url 'statistics-income-monthly' %}">This month</a>
+</div>
+<hr>
+
+{% if chart %}
+    <img src="data:image/png;base64, {{ chart | safe }}">
+{% endif %}
+
+{% endblock %}

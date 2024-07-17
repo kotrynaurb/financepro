@@ -1,0 +1,17 @@
+body {
+    background-color: #E5E4E2;
+}
+
+.card {
+    min-height: 470px;
+    width: 100%;
+}
+
+.card-body{
+    height: 25%;
+}
+
+.card img{
+    height: 75%;
+    object-fit: contain;
+}

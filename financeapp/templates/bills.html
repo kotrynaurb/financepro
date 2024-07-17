@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Bills</h1>
+<hr>
+<ul>
+    {% for bill_obj in bill_list %}
+    <li class="{% if bill_obj.status == 'o' %} text-danger
+               {% elif bill_obj.status == 'p' %} text-success
+               {% elif bill_obj.status == 'u' %} text-warning
+               {% elif bill_obj.status == 'l' %} text-info
+               {% endif %}">
+        <a href="{% url 'bill-one' bill_obj.id%}">{{ bill_obj.bill_category }}, {{ bill_obj.amount }} Eur, {{ bill_obj.date_due }}-{{ bill_obj.date_paid }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+<hr>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Bill</h1>
+<hr>
+<p><b>ID: </b>{{ bill.id }}</p>
+<p><b>Date due: </b>{{ bill.date_due }}</p>
+<p><b>Date paid: </b>{{ bill.date_paid }}</p>
+<p><b>Amount: </b>{{ bill.amount }} Eur</p>
+<p><b>Category: </b>{{ bill.bill_category }}</p>
+<p class="{% if bill.status == 'l' %} text-info
+              {% elif bill.status == 'p' %} text-success
+              {% elif bill.status == 'u' %} text-warning
+              {% elif bill.status == 'o' %} text-danger
+              {% endif %}
+    ">
+        <b>{{ bill.get_status_display }}</b>
+    </p>
+<hr>
+<h3>Bill Issuer</h3>
+<p><b>Name: </b>{{ bill.bill_issuer.name }}</p>
+<p><b>Address: </b>{{ bill.bill_issuer.address }}</p>
+<p><b>Phone: </b>{{ bill.bill_issuer.phone }}</p>
+<p><b>Email: </b>{{ bill.bill_issuer.email }}</p>
+<hr>
+<p><b>Note: </b>{{ bill.note | safe }}</p>
+<hr>
+<p><b>Invoice</b></p>
+{% if bill.pic %}
+    <img src="{{ bill.pic.url }}"/>
+{% else %}
+    <img src="{% static 'img/no-image.png' %}"/>
+{% endif %}
+<hr>
+<div>
+    <a class="btn-secondary btn-sm" href="{% url 'bill-update' bill.id %}">Edit</a>
+    <a class="btn-danger btn-sm" href="{% url 'bill-delete' bill.id %}">Delete</a>
+</div>
+
+{% endblock %}
+

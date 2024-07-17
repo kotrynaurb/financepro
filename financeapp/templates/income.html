@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Income</h1>
+<hr>
+<p><b>Date: </b>{{ income_obj.date }}</p>
+<p><b>Amount: </b>{{ income_obj.amount }} Eur</p>
+<p><b>Category: </b>{{ income_obj.income_category }}</p>
+<hr>
+<p><b>Note: </b>{{ income_obj.note | safe}}</p>
+
+<div>
+    <a class="btn-secondary btn-sm" href="{% url 'income-update' income_obj.id %}">Edit</a>
+    <a class="btn-danger btn-sm" href="{% url 'income-delete' income_obj.id %}">Delete</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Expenses</h1>
+<hr>
+{% for expense_obj in expense_list %}
+<li>
+<a href="{% url 'expense-one' expense_obj.id%}">{{ expense_obj.date }}, {{ expense_obj.amount }} Eur,
+    {{ expense_obj.display_categories }}, {{ expense_obj.company.name }}</a>
+</li>
+{% endfor %}
+
+<hr>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

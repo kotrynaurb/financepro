@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">New bill</legend>
+            {{ form | crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Save</button>
+        </div>
+    </form>
+
+{% for group in user.groups.all %}
+    {% if 'moderators' == group.name %}
+<div class="form-group">
+    <a class="btn btn-outline-info" href="{% url 'bill-category-new' %}">Create new category</a>
+    <a class="btn btn-outline-info" href="{% url 'bill-issuer-new' %}">Create new issuer</a>
+</div>
+   {% endif %}
+{% endfor %}
+
+{% endblock %}

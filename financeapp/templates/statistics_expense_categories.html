@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<hr>
+{% if chart %}
+    <img src="data:image/png;base64, {{ chart | safe }}">
+{% endif %}
+<hr>
+<a class="btn-secondary btn-sm" href="{% url 'statistics-expenses' %}">Back</a>
+
+{% endblock %}

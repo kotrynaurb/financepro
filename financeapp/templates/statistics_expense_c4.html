@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Transport</h1>
+<h4><b>Total amount spent: </b>{{ total_amount }} Eur</h4>
+<hr>
+{% if chart %}
+    <img src="data:image/png;base64, {{ chart | safe }}">
+{% endif %}
+<hr>
+<a class="btn-secondary btn-sm" href="{% url 'statistics-expenses' %}">Back</a>
+
+{% endblock %}

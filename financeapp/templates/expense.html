@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Expense</h1>
+<hr>
+<p><b>Date: </b>{{ expense.date }}</p>
+<p><b>Amount: </b>{{ expense.amount }} Eur</p>
+<p><b>Company: </b>{{ expense.company.name }}</p>
+<p><b>Category: </b>{{ expense.display_categories }}</p>
+<hr>
+<p><b>Note: </b>{{ expense.note | safe }}</p>
+<hr>
+<p><b>Invoice</b></p>
+{% if expense.pic %}
+    <img src="{{ expense.pic.url }}"/>
+{% else %}
+    <img src="{% static 'img/no-image.png' %}"/>
+{% endif %}
+<hr>
+<div>
+    <a class="btn-secondary btn-sm" href="{% url 'expense-update' expense.id %}">Edit</a>
+    <a class="btn-danger btn-sm" href="{% url 'expense-delete' expense.id %}">Delete</a>
+</div>
+
+{% endblock %}
